@@ -1,0 +1,22 @@
+digraph ParkingLot {
+    graph [label="PARKING LOT STATE\n(GREEN=Free | RED=Occupied)", fontsize=18, fontname="Helvetica", bgcolor="#f8f9fa", pad=0.5];
+    node  [fontname="Helvetica", fontsize=12];
+    edge  [style=invis];
+    rankdir=LR;
+    Slot1 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 1 | BIKE | OCCUPIED | PB10ZZ1111 | Harpreet Kaur}"];
+    Slot2 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 2 | BIKE | OCCUPIED | KA03MN9012 | Arun Nair}"];
+    Slot3 [shape=record, style=filled, fillcolor="#2ecc71", fontcolor="white", label="{Slot 3 | BIKE | FREE}"];
+    Slot4 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 4 | BIKE | OCCUPIED | UP32EF6789 | Ajay Yadav}"];
+    Slot5 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 5 | BIKE | OCCUPIED | WB20IJ4567 | Debashis Roy}"];
+    Slot6 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 6 | CAR | OCCUPIED | DL4CAB5678 | Priya Singh}"];
+    Slot7 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 7 | CAR | OCCUPIED | MH01XY9999 | Suresh Iyer}"];
+    Slot8 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 8 | CAR | OCCUPIED | MH43CD2345 | Sneha Desai}"];
+    Slot9 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 9 | CAR | OCCUPIED | RJ14GH0123 | Kavita Joshi}"];
+    Slot10 [shape=record, style=filled, fillcolor="#e74c3c", fontcolor="white", label="{Slot 10 | CAR | OCCUPIED | HR26KL8901 | Pooja Malik}"];
+    { rank=same; Slot1; Slot2; Slot3; Slot4; Slot5; }
+    { rank=same; Slot6; Slot7; Slot8; Slot9; Slot10; }
+    Slot1->Slot2->Slot3->Slot4->Slot5 [style=invis];
+    Slot6->Slot7->Slot8->Slot9->Slot10 [style=invis];
+    Slot1->Slot6 [style=invis];
+    Legend [shape=plaintext, label="Legend:\nGREEN = Free Slot\nRED = Occupied Slot"];
+}

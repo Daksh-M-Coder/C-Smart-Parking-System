@@ -1,0 +1,35 @@
+digraph Flow {
+    graph [label="PROGRAM EXECUTION FLOW\nTEAL = current step | Follow arrows to trace execution", fontsize=16, fontname="Helvetica", bgcolor="#f8f9fa", pad=0.8];
+    node  [fontname="Helvetica", fontsize=12, style=filled];
+    rankdir=TB;
+    Start [shape=oval, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="PROGRAM START\nmain() called"];
+    Init [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="SYSTEM INIT\ninit_slots() -- Array of 10 slots\ninit_hashmap() -- 20 empty buckets\ninit_stack()  -- top = -1\ninit_queue()  -- front = rear = NULL"];
+    Menu [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="SHOW MENU\nWait for user input (1-6 or 0)"];
+    Decision [shape=diamond, fillcolor="#f39c12", fontcolor=white, label="User Choice?"];
+    Park [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="PARK VEHICLE\n1. Read plate + owner + type\n2. Check duplicate -> hashmap_search()\n3. find_free_slot() -> scan array\n   If slot found: mark OCCUPIED\n   hashmap_insert(plate, slot_id)\n   stack_push(ENTRY log)\n   If no slot: queue_enqueue()"];
+    Remove [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="REMOVE VEHICLE\n1. Read plate\n2. hashmap_search() -> O(1) find slot\n3. calculate_fee() -> duration * rate\n4. Mark slot FREE\n5. hashmap_delete(plate)\n6. stack_push(EXIT log)\n7. Check queue -> auto-assign"];
+    Search [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="SEARCH VEHICLE\n1. Read plate\n2. hashmap_search() -> O(1) lookup\n3. If not found -> scan queue\n4. Show details + accrued fee"];
+    ViewLot [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="VIEW PARKING LOT\nScan array[0..9]\nPrint slot_id, type, status,\nplate, owner for each slot"];
+    ViewQueue [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="VIEW WAITING LIST\nTraverse queue linked list\nfront -> ... -> rear\nPrint position + vehicle info"];
+    ViewLog [shape=rectangle, fillcolor="#ecf0f1" fontcolor="#2c3e50", label="VIEW LOG\nRead stack top-to-bottom\nentries[top] -> entries[0]\nMost recent event shown first"];
+    Exit [shape=oval, fillcolor="#1abc9c" fontcolor="white", label="EXIT\nFree queue nodes (malloc)\nFree hashmap nodes (malloc)\nreturn 0"];
+    Viz [shape=parallelogram, style=filled, fillcolor="#8e44ad", fontcolor=white, label="GENERATE DIAGRAMS\nviz_parking_lot()\nviz_queue()\nviz_stack()\nviz_hashmap()\nviz_flow()"];
+    Start    -> Init     [label="program begins"];
+    Init     -> Menu     [label="all DS ready"];
+    Menu     -> Decision [label="reads choice"];
+    Decision -> Park      [label="choice=1"];
+    Decision -> Remove    [label="choice=2"];
+    Decision -> Search    [label="choice=3"];
+    Decision -> ViewLot   [label="choice=4"];
+    Decision -> ViewQueue [label="choice=5"];
+    Decision -> ViewLog   [label="choice=6"];
+    Decision -> Exit      [label="choice=0"];
+    Park      -> Viz [label="DS updated"];
+    Remove    -> Viz [label="DS updated"];
+    Search    -> Viz [label="DS read"];
+    ViewLot   -> Viz [label="DS read"];
+    ViewQueue -> Viz [label="DS read"];
+    ViewLog   -> Viz [label="DS read"];
+    Viz -> Menu [label="loop back", style=dashed, color="#8e44ad"];
+    Exit -> Exit [label="program ends", style=invis];
+}

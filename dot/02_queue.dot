@@ -1,0 +1,21 @@
+digraph Queue {
+    graph [label="WAITING QUEUE (FIFO -- First Come First Served)\nVehicles waiting for a free slot", fontsize=16, fontname="Helvetica", bgcolor="#f8f9fa", pad=0.5];
+    node  [fontname="Helvetica", fontsize=12];
+    rankdir=LR;
+    FRONT [shape=ellipse, style=filled, fillcolor="#3498db", fontcolor=white, label="FRONT\n(dequeue here)"];
+    REAR  [shape=ellipse, style=filled, fillcolor="#9b59b6", fontcolor=white, label="REAR\n(enqueue here)"];
+    W1 [shape=record, style=filled, fillcolor="#3498db", fontcolor="white", label="{Pos 1 | MH05HH1234 | Meet Rathod | CAR}"];
+    FRONT -> W1 [label="->"];
+    W2 [shape=record, style=filled, fillcolor="#3498db", fontcolor="white", label="{Pos 2 | MH06HH1234 | ANZAR KHAN | CAR}"];
+    W1 -> W2 [label="next"];
+    W3 [shape=record, style=filled, fillcolor="#3498db", fontcolor="white", label="{Pos 3 | MH07HH1234 | ADITIYA MAURYA | BIKE}"];
+    W2 -> W3 [label="next"];
+    W4 [shape=record, style=filled, fillcolor="#3498db", fontcolor="white", label="{Pos 4 | MH08HH1234 | Daksh MAURYA | CAR}"];
+    W3 -> W4 [label="next"];
+    W5 [shape=record, style=filled, fillcolor="#3498db", fontcolor="white", label="{Pos 5 | MH09HH1234 | Prem Mane | CAR}"];
+    W4 -> W5 [label="next"];
+    NULL_Q [shape=rectangle, style=filled, fillcolor="#95a5a6", fontcolor=white, label="NULL"];
+    W5 -> NULL_Q [label="next"];
+    REAR -> W5 [label="->", style=dashed, color="#9b59b6"];
+    Count [shape=plaintext, label="Total Waiting: 5 / 20"];
+}
